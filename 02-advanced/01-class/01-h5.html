@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    #con {
+        width: 300px;
+        height: 200px;
+        background: yellow;
+    }
+    .btn3 {
+        width: 300px;
+        height: 300px;
+        background: yellow;
+    }
+</style>
+<body>
+    <h1>移动端事件</h1>
+    <button class="btn1">单击事件</button>
+    <button class="btn2">长按事件</button>
+    <div class="btn3">左滑</div>
+</body>
+</html>
+<script src="./01-h5.js"></script>
+<script>
+    $(".btn1").tap(()=>{
+        console.log('单击事件');
+    })
+    $(".btn2").longTap(()=>{
+        console.log('长按事件');
+    })
+    $(".btn3").slideLeft(()=>{
+        console.log('左滑事件');
+    })
+    $(".btn3").slideRight(()=>{
+        console.log('右滑事件');
+    })
+</script>

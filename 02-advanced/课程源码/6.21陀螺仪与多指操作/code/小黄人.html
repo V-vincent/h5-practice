@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Document</title>
+  <style>
+    #box{
+      position: relative;
+      width: 300px;
+      margin: 0 auto;
+    }
+
+    #face{
+      background-image: url(images/face.png);
+      background-size: cover;
+      width: 300px;
+      height: 300px;
+      position: absolute;
+    }
+
+    #eyeLeft{
+      background-image: url(images/eye.png);
+      background-size: cover;
+      width: 40px;
+      height: 40px;
+      position: absolute;
+      top: 90px;
+      left: 100px;
+      z-index: 66;
+    }
+
+    #eyeRight{
+      background-image: url(images/eye.png);
+      background-size: cover;
+      width: 40px;
+      height: 40px;
+      position: absolute;
+      top: 90px;
+      left: 190px;
+      z-index: 66;
+    }
+
+    #glass{
+      background-image: url(images/glass.png);
+      background-size: 100%;
+      background-repeat: no-repeat;
+      width: 300px;
+      height: 300px;
+      position: absolute;
+      top: 56px;
+    }
+
+  </style>
+
+</head>
+
+<body>
+  <p id="box">
+    <p id="face"></p>
+    <p id="eyeLeft"></p>
+    <p id="eyeRight"></p>
+    <p id="glass"></p>
+  </p>
+
+<script>
+
+// 'use strict';
+var eyeLeftPosition = {
+  start: [70, 78],
+  end: [100, 110]
+};
+
+var eyeRightPosition = {
+  start: [150, 78],
+  end: [190, 110]
+};
+
+var eyeLeftCenterPosition = {
+  x: (eyeLeftPosition.end[0] - eyeLeftPosition.start[0]) / 2 + eyeLeftPosition.start[0],
+  y: (eyeLeftPosition.end[1] - eyeLeftPosition.start[1]) / 2 + eyeLeftPosition.start[1]
+};
+
+var eyeRightCenterPosition = {
+  x: (eyeRightPosition.end[0] - eyeRightPosition.start[0]) / 2 + eyeRightPosition.start[0],
+  y: (eyeRightPosition.end[1] - eyeRightPosition.start[1]) / 2 + eyeRightPosition.start[1]
+};
+
+var r = 20;
+var eyeLeft = document.querySelector('#eyeLeft');
+var eyeRight = document.querySelector('#eyeRight');
+if (window.DeviceOrientationEvent) {
+  window.addEventListener('deviceorientation', function (event) {
+    let {alpha, beta, gamma} = event;
+    eyeLeft.style.left = eyeLeftCenterPosition.x + gamma / 90 * r + 'px';
+    eyeRight.style.left = eyeRightCenterPosition.x + gamma / 90 * r + 'px';
+    eyeLeft.style.top = eyeRight.style.top 
+                      = eyeLeftCenterPosition.y + beta / 180 * r + 'px';
+    eyeRight.style.transform = eyeLeft.style.transform 
+                         = eyeRight.style.WebkitTransform 
+                         = eyeLeft.style.WebkitTransform 
+                         = 'rotate(' + beta + 'deg)';
+
+  }, false);
+
+} else {
+  document.querySelector('body').innerHTML = '浏览器不支持DeviceOrientationEvent';
+
+}
+</script>
+</body>
+</html>

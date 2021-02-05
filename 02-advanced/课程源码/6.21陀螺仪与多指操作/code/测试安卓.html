@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Document</title>
+  <style>
+      #con{
+          width: 220px;
+          height: 220px;
+          /* line-height: 100px; */
+          text-align: center;
+          font-size: 24px;
+          color: black;
+          position: absolute;
+          top: 100px;
+          left: 100px;
+          background: yellowgreen;
+      }
+  </style>
+</head>
+<body>
+    <div id="con">
+        <p id="p1">1</p>
+        <p id="p2">2</p>
+        <p id="p3">3</p>
+    </div>
+</body>
+<script src="./android.js"></script>
+<script>
+  let con = document.getElementById("con");
+  gesture(con,{
+      start:function(){
+        // do something
+      },
+      change:function(){
+          // do something
+      }
+  })
+</script>
+</html>

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="div1">this is div333</div>
+</body>
+</html>
+<script>
+    window.addEventListener("message", function(event){
+        document.getElementById('div1').innerHTML = "从event.origin="+event.origin+",那里来的消息event.data="+event.data;
+        setTimeout(function(){
+            event.source.postMessage("我已经接收到数据了，谢谢", event.origin);
+        }, 2000)
+    })
+</script>

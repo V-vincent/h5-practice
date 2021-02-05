@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>上拉加载与下拉刷新</title>
+</head>
+<style>
+    body {
+        margin: 0;
+    }
+    html,body {
+        height: 100%;
+    }
+    header,footer {
+        width: 100%;
+        height: 40px;
+        position: absolute;
+        left: 0;
+        text-align: center;
+        line-height: 40px;
+        background: #999999;
+        color: #ffffff;
+        z-index: 999;
+    }
+    header {
+        top: 0;
+    }
+    footer {
+        bottom: 0;
+    }
+    ul {
+        display: block;
+        width: 100%;
+        position: absolute;
+        top: 40px;
+        bottom: 40px;
+        overflow: auto;
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+    ul>li {
+        width: 100%;
+        height: 40px;
+        line-height: 40px;
+        text-indent: 20px;
+        border-bottom: 1px solid #666666;
+        background: #ffffff;
+        color: #333333;
+    }
+    #loading, #loadEnd{
+        width: 100%;
+        height: 40px;
+        line-height: 40px;
+        text-align: center;
+        color: #333333;
+        transition: all 0.5s;
+        position: absolute;
+        z-index: 1;
+    }
+    #loading{
+        background: orange;
+        top: 0;
+    }
+    #loadEnd{
+        background: green;
+        bottom: 0;
+    }
+</style>
+<body>
+    <header>我是头部</header>
+    <section id="con">
+        <div id="loading">加载中......</div>
+        <ul id="list">
+            <!-- <li>111</li> -->
+        </ul>
+    </section>
+    <div id="loadEnd">已加载全部数据</div>
+    <footer>我是尾部</footer>
+</body>
+</html>
+<script>
+    function $my(id) {
+        return document.getElementById(id);
+    }
+    let list = $my('list');
+    let loading = $my('loading');
+
+    function getData() {
+        let html = '';
+        for (let i = 0; i < 20; i++) {
+            html += '<li>我是第' + i + '个li</li>';
+        }
+        let length = list.children.length;
+        if (length === 0) {
+            list.innerHTML = html;
+        } else if (length > 0 && length < 100) {
+            insertAfter(parseDom(html), list.children[length - 1])
+        }
+    }
+    // 字符串的DOM化：DOM可以识别解析字符串
+    function parseDom(arg) {
+        let objEle = document.createElement('div');
+        objEle.innerHTML = arg;
+        return [...objEle.childNodes];
+    }
+    // 在已有元素后追加节点
+    function insertAfter(newElement, targetElement) {
+        newElement.forEach(element => {
+            targetElement.after(element);
+        })
+    }
+    window.onload = () => {
+        getData();
+        list.addEventListener('scroll', function () {
+            // ul的高度，视口高度：固定
+            let listH = list.clientHeight;
+            // li总高度：内容的高度
+            let contentH = this.childNodes.length * 41;
+
+            let diffValue = contentH - listH;
+            if (this.scrollTop + 55 >= diffValue) {
+                console.log('加载数据');
+                getData();
+            }
+
+            if (this.scrollTop == 0) {
+                console.log('下拉刷新');
+                list.style.top = "100px";
+                loading.style.top = "40px";
+                setTimeout(() => {
+                    list.style.top = "40px";
+                    loading.style.top = "0";
+                }, 1500)
+            }
+        })
+    }
+</script>

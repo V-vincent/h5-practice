@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    #box {
+        width: 500px;
+        height: 500px;
+        border: blue 2px solid;
+    }
+</style>
+<body>
+    <button id="btn">请求位置信息</button>
+    <div id="box"></div>
+</body>
+</html>
+<script>
+    let btn = document.getElementById('btn');
+    let box = document.getElementById('box');
+    btn.onclick = function () {
+        // getCurrentPosition 与定时器setInterval类似多次请求，因为位置需要不间断的获取
+        // 直接navigator.geolocation表示单次获取位置
+        // geolocation获取位置：基站获取，GPS请求获取
+        navigator.geolocation.getCurrentPosition(function(position){
+            box.innerHTML += "经度" + position.coords.longitude;
+            box.innerHTML += "纬度" + position.coords.latitude;
+            box.innerHTML += "准确度" + position.coords.accuracy;
+            box.innerHTML += "海拔" + position.coords.altitude;
+            box.innerHTML += "海拔准确度" + position.coords.altitudeAccuracy;
+            box.innerHTML += "行进方向" + position.coords.heading;
+            box.innerHTML += "地面速度" + position.coords.speed;
+            box.innerHTML += "请求的时间" + new Date(position.timestamp);
+        }, function (err) {
+            alert(err.code);
+            // code: 返回获取位置的状态
+            // 0 ： 不包括其他错误编号中的错误
+            // 1 ： 用户拒绝浏览器获取地理位置
+            // 2 ： 尝试获取用户信息，但失败了
+            // 3 ： 设置了timeout值，获取位置超时了
+            // window上的IE浏览器可以获取到位置，谷歌浏览器获取不到，会超时
+        }, {
+            enableHighAccuracy: false, // 位置是否准确获取
+            timeout: 5000, // 获取位置允许的最长时间
+            maximumAge: 1000, // 多久更新获取一次位置
+        })
+    }
+    console.log(localStorage);
+    
+</script>

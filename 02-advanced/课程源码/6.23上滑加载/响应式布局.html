@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, 
+                                   initial-scale=1.0, 
+                                   maximum-scale=1.0, 
+                                   user-scalable=no"
+                                   />
+    <title>Document</title>
+    <style>
+        body{
+            margin: 0;
+            padding: 0;
+        }
+        header{
+            width: 100%;
+            height: 800px;
+            background: green;
+            color: white;
+        }
+        .div1{
+            width: 300px;
+            height: 200px;
+            background: pink;
+            color: #333333;
+        }
+        .div2{
+            width: 200px;
+            height: 100px;
+            background: orange;
+            color: #333333;
+        }
+        /* 小于或等于某个值 */
+        @media screen and (max-width: 980px){
+            .div1{
+                width: 120px;
+            }
+        }
+         /* 大于或等于某个值 */
+         @media screen and (min-width: 1000px){
+            .div1{
+                width: 500px;
+            }
+        }
+        /* 1000-1200 在某个区间内生效*/
+        @media screen and (min-width: 1000px) and (max-width:1200px){
+            .div2{
+                background: yellow;
+            }
+        }
+    </style>
+    <link rel="stylesheet" media="screen and (max-device-width:500px)" href="./css/css1.css" />
+    <link rel="stylesheet" media="screen and (min-device-width:500px)" href="./css/css2.css" />
+</head>
+<body>
+    <header>
+        <div class="div1">
+            <h1>测试max-width,min-width</h1>
+        </div>
+        <div class="div2">
+            区间
+        </div>
+        <div class="div3">
+            media修改link href
+        </div>
+    </header>
+    <section>
+
+    </section>
+    <footer>
+
+    </footer>
+</body>
+</html>    

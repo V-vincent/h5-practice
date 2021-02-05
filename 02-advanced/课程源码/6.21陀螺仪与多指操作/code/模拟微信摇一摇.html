@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Document</title>
+  <style>
+      #con{
+          width: 200px;
+          height: 200px;
+          line-height: 100px;
+          text-align: center;
+          font-size: 48px;
+          color: black;
+          position: absolute;
+          top: 100px;
+          left: 100px;
+          background: yellowgreen;
+      }
+  </style>
+</head>
+<body>
+    <div id="con">
+        <p id="text">快来摇我</p>
+    </div>
+</body>
+<script>
+
+    function $my(id){
+        return document.getElementById(id);
+    }
+
+    // 记住各轴
+    let lastX,lastY,lastZ;
+    let isRange = false;
+
+    // 阙值
+    let maxRange = 70; // 剧烈晃动： 100-150 轻微：30<  触发动作：60-100
+    let minRange = 10;
+    
+    let text = document.getElementById("text");
+    let con = document.getElementById("con");
+
+    // devicemotion只能监听window
+    window.addEventListener("devicemotion", (e)=>{
+        let motion = e.accelerationIncludingGravity;
+        let x = Math.round(motion.x); 
+        let y = Math.round(motion.y); 
+        let z = Math.round(motion.z); 
+
+        let distance = Math.abs(x - lastX) + 
+                       Math.abs(y - lastY) + 
+                       Math.abs(z - lastZ);
+        if(distance > maxRange){
+            text.innerHTML = "摇一摇";
+            isRange = true;
+        }
+        // 用户停下来了 但是已经摇过了，满足了条件
+        if(distance < minRange &&　isRange){
+            setTimeout(()=>{
+                text.innerHTML = "触发事件";
+            }, 4000)
+        }
+
+        lastX = x;
+        lastX = y;
+        lastX = z;
+    })
+
+</script>
+</html>

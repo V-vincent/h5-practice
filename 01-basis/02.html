@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <header>header</header>
+    <nav>nav</nav>
+    <section>section</section>
+    <aside>aside</aside>
+    <article>article</article>
+    <footer>footer</footer>
+
+    <form action="">
+        <input type="email" name="email" placeholder="请输入邮箱">
+        <input type="url" name="url" placeholder="请输入地址">
+        <input type="date" name="date">
+        <input type="number" name="number">
+        <input type="range" name="range">
+        <input type="color" name="color">
+        <input type="search" name="search">
+        <input type="reset" value="reset"><input type="submit" value="submit">
+    </form>
+
+    <canvas id="myCanvas" width="200" height="100">
+        您的浏览器暂时不支持canvas，请升级您的浏览器！
+    </canvas>
+
+    <video width="320" height="240" controls>
+        <source src="movie.mp4" type="video/mp4">
+        <source src="movie.ogg" type="video/ogg"> 
+        您的浏览器不支持Video标签。
+    </video>
+
+    <audio src="soong.ogg" controls>
+        您的浏览器不支持音频元素。
+    </audio>
+</body>
+</html>
+<script>
+// HTML5新增标签
+// header：网站头部
+// nav：导航栏
+// section：类似div
+// aside：文件侧栏
+// article：文章/文本内容
+// footer：网站脚本
+// 作用：对SEO友好，更易于被搜索引擎索引到，标签语义化，提高代码可用性
+
+// HTML5新增表单输入框的类型
+// type="email"  限制用户输入必须为Email类型
+// type="url"  限制用户输入必须为URL类型
+// type="date"  自动生成一个日期控件
+// type="number"  限制用户输入必须为数字类型
+// type="range"  产生一个进度条的表单
+// type="search"  产生一个搜索意义的表单
+// type="color"  生成一个颜色选择表单
+// 注意：1、表单元素一定要在form元素之下，2、form一定要有action属性，以防后面需要提交到什么地方
+// 3、每个表单元素(需要录入数据的表单元素)都应该有一个name属性
+
+// HTML5新增表单输入框的属性
+// placeholder => 占位文本，体验更佳：提示
+// autofocus：自动获取焦点
+// autocomplete：提交一次后下次自动补全
+// multiple：配合file控件实现多选
+// 表单的输入校验通常会使用第三方库去实现
+
+// HTML5制图 & Canvas
+// HTML5 新增的元素<canvas>只是图形的容器，必须通过脚本(通常是JavaScript)来绘制图形
+// 可以通过多种方法使用<canvas>绘制路径--盒、圆、字符及添加图像
+var c = document.getElementById('myCanvas');
+if (c.getContext) {
+    var ctx = c.getContext("2d");
+    ctx.font = "30px Arial";
+    ctx.fillText("Hello World", 10, 50);
+}
+
+// HTML5多谋体 & Video
+// <video>元素提供播放、暂停和音量控件来控制视频；提供width和height属性控制视频尺寸
+// <video>与</video>标签间插入的内容是供不支持video元素的浏览器显示的
+// <video>元素支持多个<source>元素，<source>元素在浏览器使用的是第一个识别(支持)视频文件
+// <video width="320" height="240" controls>
+//  <source src="movie.mp4" type="video/mp4">
+//  <source src="movie.ogg" type="video/ogg"> 
+//  您的浏览器不支持Video标签。
+// </video>
+
+// HTML5多谋体 & Audio
+// <audio>与</audio>间插入浏览器不支持<audio>元素的提示文本
+// <audio>元素支持多个<source>元素，<source>元素在浏览器使用的是第一个识别(支持的音频文件)
+// <audio src="soong.ogg" controls>
+//  您的浏览器不支持音频元素。
+// </audio>
+// 浏览器不兼容可能是音频源文件的问题，尽量选用兼容性好的源文件
+</script>

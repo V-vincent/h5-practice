@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>陀螺仪</title>
+</head>
+<body>
+    <div>
+        <p id="p1"></p>
+        <p id="p2"></p>
+        <p id="p3"></p>
+    </div>
+</body>
+</html>
+<script>
+    function $my(id) {
+        return document.getElementById(id);
+    }
+    let p1 = $my('p1');
+    let p2 = $my('p2');
+    let p3 = $my('p3');
+
+    window.addEventListener('devicemotion', (e) => {
+        console.log(e);
+        let motion = e.accelerationIncludingGravity;
+        let x = Math.round(motion.x);
+        let y = Math.round(motion.y);
+        let z = Math.round(motion.z);
+        if (!getAdr()) {
+            x = -x;
+            y = -y;
+            z = -z;
+        }
+        p1.innerHTML = 'x:' + x;
+        p2.innerHTML = 'y:' + y;
+        p3.innerHTML = 'z:' + z;
+    })
+
+    // 获取设备的机器信息 Android/IOS
+    function getAdr() {
+        let type = navigator.userAgent;
+        let isAndroid = type.indexOf("Android") > -1 || type.indexOf("Adr") > 1;
+        return isAndroid;
+    }
+</script>

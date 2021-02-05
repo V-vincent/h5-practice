@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Document</title>
+  <style>
+      #con{
+          width: 200px;
+          height: 200px;
+          line-height: 100px;
+          text-align: center;
+          font-size: 48px;
+          color: black;
+          position: absolute;
+          top: 100px;
+          left: 100px;
+          background: yellowgreen;
+      }
+  </style>
+</head>
+<body>
+    <div id="con">
+
+    </div>
+</body>
+<script>
+    function $my(id){
+        return document.getElementById(id);
+    }
+    window.onload = () =>{
+       let con = $my("con");
+       // 手指触碰元素，屏幕上有两个或两个以上的手指
+       con.addEventListener("gesturestart",(e)=>{
+           con.innerHTML = "两个手指在屏幕上";
+       })
+       // 发生了移动
+       con.addEventListener("gesturechange",(e)=>{
+           con.innerHTML = "两个手指在屏幕上,发生了移动";
+       })
+       // 手指离开
+       con.addEventListener("gestureend",(e)=>{
+           con.innerHTML = "手指离开";
+       })
+    }
+    // gestur... 只适用于苹果
+</script>
+</html>

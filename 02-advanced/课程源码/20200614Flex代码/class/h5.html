@@ -1,0 +1,48 @@
+<!DOCTYPE> 
+<html lang="ZH-cn"> 
+<head>
+    <meta charset="utf-8" >
+    <title>标题</title>
+    <meta name="keywords" content="关键字" /> 
+    <meta name="description" content="网页描述" />
+    <!-- 禁止双击放大 -->
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0;" name="viewport" />
+</head>
+<style>
+    .con{
+        width: 300px;
+        height: 200;
+        background: green;
+        color: white;
+    }
+    .btn3{
+        width: 300px;
+        height: 300px;
+        border: 1px solid #666666;
+    }
+</style>
+<body>
+    <h1>移动端事件</h1>
+    <button class="btn">
+        单击事件
+    </button>
+    <button class="btn2">
+        长按事件
+    </button>
+    <div class="btn3">
+        左滑
+    </div>
+   <script src="./h5.js"></script>
+    <script>
+        $(".btn").tap(()=>{
+            console.log("单击事件");
+        })
+        $(".btn2").longTap(()=>{
+            console.log("长按事件");
+        })
+        $(".btn3").slideLeft(()=>{
+            console.log("左滑事件");
+        })
+    </script>
+</body>
+</html>

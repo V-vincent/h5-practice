@@ -1,0 +1,11 @@
+CACHE MANIFEST
+# 2020-06-28 v1.0.0
+CACHE:
+style/index.css
+js/index.js
+
+NETWORK:
+login.php
+
+FALLBACK:
+/html5

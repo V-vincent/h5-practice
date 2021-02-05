@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>移动端自定义滑动区域</title>
+</head>
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+    }
+    body, html {
+        height: 100%;
+        overflow: hidden;
+        position: relative;
+    }
+    header {
+        width: 100%;
+        height: 40px;
+        background: greenyellow;
+        color: black;
+        line-height: 40px;
+        text-align: center;
+    }
+    #wrap {
+        position: absolute;
+        top: 40px;
+        bottom: 0;
+        right: 0;
+        left: 0;
+        overflow: hidden;
+    }
+    #list {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+    }
+    #list li {
+        background: #ffffff;
+        color: #333333;
+        height: 40px;
+        line-height: 40px;
+        border-bottom: 1px solid #999999;
+        text-align: center;
+    }
+</style>
+<body>
+    <header>
+        我是header
+    </header>
+    <div id="wrap">
+        <ul id="list"></ul>
+    </div> 
+</body>
+</html>
+<script>
+    function $my(id) {
+        return document.getElementById(id);
+    }
+    function initList() {
+        let list = $my('list');
+        let html = '';
+        for (let i = 1; i < 80; i++) {
+            html += "<li>第" + i + "行</li>";
+        }
+        list.innerHTML = html;
+    }
+    initList();
+
+    let wrap = $my('wrap');
+    let lists = $my('list');
+
+    let startY = 0,
+        startEl = 0, // 初始距离
+        translateY = 0;
+    lists.addEventListener('touchstart', function (e) {
+        startY = e.changedTouches[0].pageY;
+        startEl = translateY;
+        console.log('startEl:' + startEl);
+    })
+
+    lists.addEventListener('touchmove', function (e) {
+        let moveY = e.changedTouches[0].pageY;
+        let distance = moveY - startY;
+        console.log('distance:' + distance);
+        translateY = startEl + distance;
+        // console.log('translateY:' + translateY);
+
+        lists.style.webkitTransform = lists.style.transform = "translateY(" + translateY + "px)";
+    })
+</script>
