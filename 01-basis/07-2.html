@@ -1,114 +1,117 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>    
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Canvas</title>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Canvas</title>
 </head>
+
 <body onload="draw()">
-    <canvas id="canvas" width="150" height="150">
-        您的浏览器暂时不支持canvas，请升级或更换您的浏览器！
-    </canvas>
+  <canvas id="canvas" width="150" height="150">
+    您的浏览器暂时不支持canvas，请升级或更换您的浏览器！
+  </canvas>
 </body>
+
 </html>
 <script>
-    function draw() {
-        var canvas = document.getElementById('canvas');
-        if (canvas.getContext) {
-            var ctx = canvas.getContext('2d'); 
-            // ctx.beginPath(); // 开始一段新的路径
-            // ctx.moveTo(0, 150); // 将画笔移动到开始点(0, 150)
-            // ctx.quadraticCurveTo(75, 0, 150, 150); // 控制点为(75, 0)， 结束点为(150, 150);
-            // ctx.stroke();
+  function draw() {
+    var canvas = document.getElementById('canvas');
+    if (canvas.getContext) {
+      var ctx = canvas.getContext('2d');
+      // ctx.beginPath(); // 开始一段新的路径
+      // ctx.moveTo(0, 150); // 将画笔移动到开始点(0, 150)
+      // ctx.quadraticCurveTo(75, 0, 150, 150); // 控制点为(75, 0)， 结束点为(150, 150);
+      // ctx.stroke();
 
-            // ctx.clearRect(0, 0, 150, 150); // 清空画布
-            // ctx.beginPath();
-            // ctx.moveTo(0, 100); // 将画笔移动到开始点(0, 100)
-            // ctx.bezierCurveTo(50, 50, 100, 150, 150, 100); // 控制点1为(50, 50)，控制点2为(100, 150)， 结束点为(150, 100);
-            // ctx.stroke();
+      // ctx.clearRect(0, 0, 150, 150); // 清空画布
+      // ctx.beginPath();
+      // ctx.moveTo(0, 100); // 将画笔移动到开始点(0, 100)
+      // ctx.bezierCurveTo(50, 50, 100, 150, 150, 100); // 控制点1为(50, 50)，控制点2为(100, 150)， 结束点为(150, 100);
+      // ctx.stroke();
 
-            // ctx.clearRect(0, 0, 150, 150); // 清空画布
-            // var circle = new Path2D();
-            // circle.moveTo(125, 35);
-            // circle.arc(100, 35, 25, 0, 2*Math.PI);
-            // ctx.fill(circle);
+      // ctx.clearRect(0, 0, 150, 150); // 清空画布
+      // var circle = new Path2D();
+      // circle.moveTo(125, 35);
+      // circle.arc(100, 35, 25, 0, 2*Math.PI);
+      // ctx.fill(circle);
 
-            // ctx.clearRect(0, 0, 150, 150); // 清空画布
-            // var svg = new Path2D("M10 10 h 80 v 80 h -80 Z");
-            // ctx.fill(svg);
+      // ctx.clearRect(0, 0, 150, 150); // 清空画布
+      // var svg = new Path2D("M10 10 h 80 v 80 h -80 Z");
+      // ctx.fill(svg);
 
-            ctx.lineWidth = 10;
-            ctx.strokeStyle = "red";
-            ctx.translate(75, 75); // 偏移
-            ctx.rotate(30 / 180 * Math.PI); // 这里注意旋转30°的写法
-            ctx.beginPath();
-            ctx.moveTo(0, -30);
-            ctx.lineTo(0, -50);
-            ctx.stroke();
+      ctx.lineWidth = 10;
+      ctx.strokeStyle = "red";
+      ctx.translate(75, 75); // 偏移
+      ctx.rotate(30 / 180 * Math.PI); // 这里注意旋转30°的写法
+      ctx.beginPath();
+      ctx.moveTo(0, -30);
+      ctx.lineTo(0, -50);
+      ctx.stroke();
 
-            ctx.rotate(30 / 180 * Math.PI);
-            ctx.beginPath();
-            ctx.moveTo(0, -0);
-            ctx.lineTo(0, -20);
-            ctx.stroke();
-            ctx.save(); // 保存
-            ctx.rotate(30 / 180 * Math.PI);
-            ctx.beginPath();
-            ctx.moveTo(0, -30);
-            ctx.lineTo(0, -50);
-            ctx.stroke();
-            // ctx.restore(); // 恢复
+      ctx.rotate(30 / 180 * Math.PI);
+      ctx.beginPath();
+      ctx.moveTo(0, -0);
+      ctx.lineTo(0, -20);
+      ctx.stroke();
+      ctx.save(); // 保存
+      ctx.rotate(30 / 180 * Math.PI);
+      ctx.beginPath();
+      ctx.moveTo(0, -30);
+      ctx.lineTo(0, -50);
+      ctx.stroke();
+      // ctx.restore(); // 恢复
 
-            ctx.rotate(30 / 180 * Math.PI);
-            ctx.beginPath();
-            ctx.moveTo(0, -0);
-            ctx.lineTo(0, -20);
-            ctx.stroke();
-        }
+      ctx.rotate(30 / 180 * Math.PI);
+      ctx.beginPath();
+      ctx.moveTo(0, -0);
+      ctx.lineTo(0, -20);
+      ctx.stroke();
     }
+  }
 </script>
 <script>
-// 贝塞尔曲线
-// 二次及三次贝塞尔曲线都十分有用，一般用来绘制复杂有规律的图形
-// 绘制二次贝塞尔曲线：`quadraticCurveTo(cp1x, cp1y, x, y)`， `cp1x`、`cp1y`为一个控制点，`x`、`y`为结束点
-// 绘制三次贝塞尔曲线：`bezierCurveTo(cp1x, cp1y, cp2x, cp2y, x, y)`， `cp1x`、`cp1y`为第一个控制点， `cp2x`、`cp2y`为第二个控制点，`x`、`y`为结束点
-// 使用 `moveTo(x, y)` 来确定图形的开始点
+  // 贝塞尔曲线
+  // 二次及三次贝塞尔曲线都十分有用，一般用来绘制复杂有规律的图形
+  // 绘制二次贝塞尔曲线：`quadraticCurveTo(cp1x, cp1y, x, y)`， `cp1x`、`cp1y`为一个控制点，`x`、`y`为结束点
+  // 绘制三次贝塞尔曲线：`bezierCurveTo(cp1x, cp1y, cp2x, cp2y, x, y)`， `cp1x`、`cp1y`为第一个控制点， `cp2x`、`cp2y`为第二个控制点，`x`、`y`为结束点
+  // 使用 `moveTo(x, y)` 来确定图形的开始点
 
-// 高级路径值Path2D
-// Path2D对象用来缓存或记录绘画命令，以便快速地回顾路径。
-// 所有的路径方法比如moveTo, rect, arc 或quadraticCurveTo等，如我们前面见过的，都可以在Path2D中使用
+  // 高级路径值Path2D
+  // Path2D对象用来缓存或记录绘画命令，以便快速地回顾路径。
+  // 所有的路径方法比如moveTo, rect, arc 或quadraticCurveTo等，如我们前面见过的，都可以在Path2D中使用
 
-// Path2D API有另外一个强大的特点：使用SVG path data来初始化canvas上的路径
-    // var p = new Path2D("M10 10 h 80 v 80 h -80 Z");
-    // ctx.fill(p);
-// 这条路径先移动到点(M10 10)， 然后再水平移动80个单位(h 80)，然后下移80个单位(v 80)，接着左移80个单位(h -80)，再回到起点处(Z).
-// 关于svg data的语法和理解，可以参考第三方文档和资料
+  // Path2D API有另外一个强大的特点：使用SVG path data来初始化canvas上的路径
+  // var p = new Path2D("M10 10 h 80 v 80 h -80 Z");
+  // ctx.fill(p);
+  // 这条路径先移动到点(M10 10)， 然后再水平移动80个单位(h 80)，然后下移80个单位(v 80)，接着左移80个单位(h -80)，再回到起点处(Z).
+  // 关于svg data的语法和理解，可以参考第三方文档和资料
 
-// canvas的状态控制
-// 在了解变形之前，先介绍2个开始绘制复杂图形时必不可少的方法。
-// save()：保存画布的所有状态，canvas的状态就是当前画面应用的所有样式和变形的一个快照。
-// restore()：恢复画布的状态，这两个方法都没有参数。
-// Canvas状态存储在栈中，每当save()方法被调用后，当前的状态就被推送到栈中保存。
-// 一个绘画状态包括：
-// 1.当前应用的变形(即移动，旋转和缩放等)
-// 2.strokeStyle,fillStyle,globalAlpha,lineWidth,lineCap,lineJoin,miterLimit等等属性的值
-// 3.当前的裁切路径(clipping path)
-// 你可以调用任意多次的save方法，每一次调用restore方法，上一个保存的状态就从栈中弹出，所有设定都恢复。
+  // canvas的状态控制
+  // 在了解变形之前，先介绍2个开始绘制复杂图形时必不可少的方法。
+  // save()：保存画布的所有状态，canvas的状态就是当前画面应用的所有样式和变形的一个快照。
+  // restore()：恢复画布的状态，这两个方法都没有参数。
+  // Canvas状态存储在栈中，每当save()方法被调用后，当前的状态就被推送到栈中保存。
+  // 一个绘画状态包括：
+  // 1.当前应用的变形(即移动，旋转和缩放等)
+  // 2.strokeStyle,fillStyle,globalAlpha,lineWidth,lineCap,lineJoin,miterLimit等等属性的值
+  // 3.当前的裁切路径(clipping path)
+  // 你可以调用任意多次的save方法，每一次调用restore方法，上一个保存的状态就从栈中弹出，所有设定都恢复。
 
-// 变形
-// 移动(Translating)
-// translate(x, y): translate方法接受两个参数，x是左右偏移量，y是上下偏移量
-// 缩放(Scaling)
-// scale(x, y): 参数都是实数，可为负数，x为水平缩放，y为垂直缩放，如果比1小会缩小图形，如果比1大会放大图形。默认值为1
-// 旋转(Rotating)
-// rotate(angle): 这个方法只接受一个参数，旋转的角度(angle)，它是顺时针方向的，以弧度为单位的值
-// 变形(Transforms)
-// tranfor(m11, m12, m21, m22, dx, dy)
-// 这个方法是将当前的变形矩阵乘上一个基于自身参数的矩阵
+  // 变形
+  // 移动(Translating)
+  // translate(x, y): translate方法接受两个参数，x是左右偏移量，y是上下偏移量
+  // 缩放(Scaling)
+  // scale(x, y): 参数都是实数，可为负数，x为水平缩放，y为垂直缩放，如果比1小会缩小图形，如果比1大会放大图形。默认值为1
+  // 旋转(Rotating)
+  // rotate(angle): 这个方法只接受一个参数，旋转的角度(angle)，它是顺时针方向的，以弧度为单位的值
+  // 变形(Transforms)
+  // tranfor(m11, m12, m21, m22, dx, dy)
+  // 这个方法是将当前的变形矩阵乘上一个基于自身参数的矩阵
 
-// 你可以通过以下的步骤来画出一帧：
-// (1)清空canvas：除非接下来要画的内容会完全充满canvas(例如背景图)，否则需要清空所有内容。最简单的做法就是用clearRect方法
-// (2)保存canvas状态：如果需要改变一些会改变canvas状态的设置(样式，变形之类的)，又要在每画一帧之时都是原始状态的话，需要先保存一下。
-// (3)绘制动画图形(animated shapes)：这一步才是重绘动画帧。
-// (4)恢复canvas状态：如果已经保存了canvas的状态，可以先恢复它，然后重绘下一帧。
+  // 你可以通过以下的步骤来画出一帧：
+  // (1)清空canvas：除非接下来要画的内容会完全充满canvas(例如背景图)，否则需要清空所有内容。最简单的做法就是用clearRect方法
+  // (2)保存canvas状态：如果需要改变一些会改变canvas状态的设置(样式，变形之类的)，又要在每画一帧之时都是原始状态的话，需要先保存一下。
+  // (3)绘制动画图形(animated shapes)：这一步才是重绘动画帧。
+  // (4)恢复canvas状态：如果已经保存了canvas的状态，可以先恢复它，然后重绘下一帧。
 </script>

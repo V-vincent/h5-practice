@@ -1,87 +1,95 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <style>
-        button{
-            width: 150px;
-            height: 36px;
-            line-height: 36px;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    button {
+      width: 150px;
+      height: 36px;
+      line-height: 36px;
+    }
 
-        .big-box {
-            width: 300px;
-            height: 300px;
-            float: left;
-            background: red;
-        }
-        .small-box {
-            width: 100px;
-            height: 100px;
-            float: left;
-            background: blue;
-        }
-    </style>
+    .big-box {
+      width: 300px;
+      height: 300px;
+      float: left;
+      background: red;
+    }
+
+    .small-box {
+      width: 100px;
+      height: 100px;
+      float: left;
+      background: blue;
+    }
+  </style>
 </head>
 <body>
-    <button onclick="setSessionStorage()">setSessionStorage</button>
-    <button onclick="setLocalStorage()">setLocalStorage</button>
+  <button onclick="setSessionStorage()">setSessionStorage</button>
+  <button onclick="setLocalStorage()">setLocalStorage</button>
 
-    <div class="box">
-        <div class="big-box" id="big" ondragenter="dragenter(event)" ondragover="dragover(event)" ondragleave="dragleave(event)" ondrop="drop(event)"></div>
-        <div class="small-box" id="small" draggable="true" ondragstart="dragstart(event)" ondrag="drag(event)" ondragend="dragend(event)"></div>
-    </div>
+  <div class="box">
+    <div class="big-box" id="big" ondragenter="dragenter(event)" ondragover="dragover(event)"
+      ondragleave="dragleave(event)" ondrop="drop(event)"></div>
+    <div class="small-box" id="small" draggable="true" ondragstart="dragstart(event)" ondrag="drag(event)"
+      ondragend="dragend(event)"></div>
+  </div>
 </body>
+
 </html>
 <script>
-// HTML5的Web存储功能
-// 传统document.cookie存储方式的弊端
-// 1、存储容量限制小(4k左右)，2、解析复杂，3、每次发送请求都携带cookie，浪费带宽，给开发带来不便
-// 将数据存储到用户的电脑上，缓解服务器压力，提高体验。具体分为：
-// 1、会话存储(window.sessionStorage)生命周期为关闭浏览器窗口，同一个窗口下数据可共享
-// 2、本地存储(window.localStorage)永久生效，除非手动删除，可多窗口共享
-// Application：只要是数据存储基本都可以在Application里面看到
-// 两者作用域不一样，可以根据存储方式的不同，将临时数据和永久数据区分开来
-function setSessionStorage(){
+  // HTML5的Web存储功能
+  // 传统document.cookie存储方式的弊端
+  // 1、存储容量限制小(4k左右)，2、解析复杂，3、每次发送请求都携带cookie，浪费带宽，给开发带来不便
+  // 将数据存储到用户的电脑上，缓解服务器压力，提高体验。具体分为：
+  // 1、会话存储(window.sessionStorage)生命周期为关闭浏览器窗口，同一个窗口下数据可共享
+  // 2、本地存储(window.localStorage)永久生效，除非手动删除，可多窗口共享
+  // Application：只要是数据存储基本都可以在Application里面看到
+  // 两者作用域不一样，可以根据存储方式的不同，将临时数据和永久数据区分开来
+  function setSessionStorage() {
     window.sessionStorage.setItem("sessionData", "data1");
-}
-function setLocalStorage(){
-    window.localStorage.setItem("localData", "data2");
-}
+  }
 
-// HTML5的拖放释放功能
-// 定义：拖放是HTML5常见特性，即抓取对象以后拖到另一个位置，并且任何元素都能拖放
-// 在拖动目标上会触发的事件(源对象)
-// ondragstart：源对象开始拖动元素时触发
-// ondrag：源对象正在拖动时触发
-// ondragend：源对象完成后拖动触发
-function dragstart(event) {
+  function setLocalStorage() {
+    window.localStorage.setItem("localData", "data2");
+  }
+  // HTML5的拖放释放功能
+  // 定义：拖放是HTML5常见特性，即抓取对象以后拖到另一个位置，并且任何元素都能拖放
+  // 在拖动目标上会触发的事件(源对象)
+  // ondragstart：源对象开始拖动元素时触发
+  // ondrag：源对象正在拖动时触发
+  // ondragend：源对象完成后拖动触发
+  function dragstart(event) {
     console.log("dragstart");
     event.dataTransfer.setData('source', event.target.id);
-}
-function drag(event) {
+  }
+
+  function drag(event) {
     // console.log("drag");
-}
-function dragend(event) {
+  }
+
+  function dragend(event) {
     console.log("dragend");
-}
-// 目标元素
-function dragenter(event) {
+  }
+  // 目标元素
+  function dragenter(event) {
     console.log("dragenter");
-}
-function dragover(event) {
+  }
+
+  function dragover(event) {
     // console.log("dragover");
     event.preventDefault(); // 阻止默认事件后可用触发drop事件
-}
-function dragleave(event) {
+  }
+
+  function dragleave(event) {
     console.log("dragleave");
-}
-// 默认不会触发drop事件，被dragover事件阻止掉了
-function drop(event) {
+  }
+  // 默认不会触发drop事件，被dragover事件阻止掉了
+  function drop(event) {
     var source = document.getElementById(event.dataTransfer.getData('source'))
     event.target.appendChild(source);
     // console.log("drop");
-}
+  }
 </script>

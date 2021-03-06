@@ -1,26 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>跨文档消息传输示例</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>跨文档消息传输示例</title>
 </head>
+
 <body>
-    <iframe src="./04-msg.html" frameborder="0" width="400" height="400" onload="sendMsg();" id="iframe"></iframe>
-    <div id="div1"></div>
+  <iframe src="./04-msg.html" frameborder="0" width="400" height="400" onload="sendMsg();" id="iframe"></iframe>
+  <div id="div1"></div>
 </body>
+
 </html>
 <script>
-    window.addEventListener('message', function(event){
-        document.getElementById('div1').innerHTML="从event.origin="+event.origin+",那里来的消息event.data="+event.data;
-    })
-    // 向id为iframe内嵌框架中发送一条消息
-    function sendMsg(){
-        var iframeWindow = document.getElementById("iframe").contentWindow;
-        var information = {"张三": 0, "李四": 20, "王五": 30};
-        var jsontext = JSON.stringify(information);
-        setTimeout(function(){
-            iframeWindow.postMessage(jsontext, "file:///E:/26-major/10-H5/01-basis/04-msg.html")
-        }, 2000)
-    }
+  window.addEventListener('message', function (event) {
+    document.getElementById('div1').innerHTML = "从event.origin=" + event.origin + ",那里来的消息event.data=" + event.data;
+  })
+  // 向id为iframe内嵌框架中发送一条消息
+  function sendMsg() {
+    var iframeWindow = document.getElementById("iframe").contentWindow;
+    var information = {
+      "张三": 0,
+      "李四": 20,
+      "王五": 30
+    };
+    var jsontext = JSON.stringify(information);
+    setTimeout(function () {
+      iframeWindow.postMessage(jsontext, "file:///E:/26-major/10-H5/01-basis/04-msg.html")
+    }, 2000)
+  }
 </script>

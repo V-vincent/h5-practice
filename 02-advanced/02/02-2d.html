@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>transform</title>
+</head>
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+  }
+
+  .con {
+    width: 120px;
+    height: 120px;
+    display: flex;
+    border: 1px solid teal;
+  }
+
+  .translate-scale,
+  .translate,
+  .scale,
+  .skew,
+  .rotate {
+    width: 50px;
+    height: 50px;
+    background: rgb(70, 32, 207);
+    margin: auto;
+    line-height: 50px;
+    text-align: center;
+    color: #fff;
+    transition: all .5s;
+  }
+</style>
+
+<body>
+  <h1>transform2D变换</h1>
+  <h3>旋转</h3>
+  <div class="con">
+    <div class="rotate">旋转</div>
+  </div>
+  <h3>斜切</h3>
+  <div class="con">
+    <div class="skew">斜切</div>
+  </div>
+  <h3>缩放</h3>
+  <div class="con">
+    <div class="scale">缩放</div>
+  </div>
+  <h3>位移</h3>
+  <div class="con">
+    <div class="translate">位移</div>
+  </div>
+  <h3>位移+缩放</h3>
+  <div class="con">
+    <div class="translate-scale">位移+缩放</div>
+  </div>
+</body>
+
+</html>
+<!-- <script src="./02-cssTransform.js"></script> -->
+<script src="./02-Transform.js"></script>
+<script>
+  function $getEle(classes) {
+    return document.querySelector(classes);
+  }
+
+  // 旋转 顺时针 90° 中心点
+  let rotate = $getEle('.rotate');
+  rotate.addEventListener('touchstart', function () {
+    // rotate.style.transform = "rotate(90deg)";
+    // cssTransform(rotate, "rotate", 90);
+
+    Transform(rotate); // dom赋能
+    rotate.rotate = 90;
+  })
+
+  // 斜切 x轴 围绕中心点
+  let skew = $getEle('.skew');
+  skew.addEventListener('touchstart', function () {
+    // skew.style.transform = "skew(30deg)";
+    skew.style.transform = "skewX(30deg) skewY(30deg)";
+  })
+
+  // 缩放 默认1 围绕中心点 number
+  let scale = $getEle('.scale');
+  scale.addEventListener('touchstart', function () {
+    scale.style.transform = "rotate(360deg) scale(2)";
+  })
+
+  // px 中心点不受影响 x轴
+  let translate = $getEle('.translate');
+  translate.addEventListener('touchstart', function () {
+    translate.style.transform = "translate(50px)";
+  })
+
+  // 位移+缩放：顺序，先写的后执行
+  let translateScale = $getEle('.translate-scale');
+  translateScale.addEventListener('touchstart', function () {
+    translateScale.style.transform = "scale(2) translate(50px)";
+  })
+</script>

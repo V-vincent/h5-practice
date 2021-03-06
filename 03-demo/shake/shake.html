@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>摇一摇</title>
+</head>
+<style>
+  #con {
+    width: 200px;
+    height: 200px;
+    line-height: 100px;
+    text-align: center;
+    font-size: 48px;
+    color: black;
+    position: absolute;
+    top: 100px;
+    left: 100px;
+    background: yellowgreen;
+  }
+</style>
+
+<body>
+  <div id="con">
+    <p id="text">快来摇我</p>
+  </div>
+</body>
+
+</html>
+<script>
+  function $my(id) {
+    return document.getElementById(id);
+  }
+
+  // 记住各轴
+  let lastX,
+    lastY,
+    lastZ;
+  let isRange = false; // 是否已经开始摇动
+  // 阈值
+  let maxRange = 70, // 剧烈晃动：100-150，轻微：<30，触发动作：60-100
+    minRange = 10; // 最小值：手机处于静止状态时才显示结果
+  let text = $my('text');
+  let con = $my('con');
+
+  // devicemotion 只能监听window
+  window.addEventListener('devicemotion', function (e) {
+    let motion = e.accelerationIncludingGravity;
+    let x = Math.round(motion.x);
+    let y = Math.round(motion.y);
+    let z = Math.round(motion.z);
+    let distance = Math.abs(x - lastX) +
+      Math.abs(y - lastY) +
+      Math.abs(z - lastZ);
+
+    if (distance > maxRange) {
+      text.innerHTML = "摇一摇";
+      isRange = true;
+    }
+
+    if (distance < minRange && isRange) {
+      setTimeout(() => {
+        text.innerHTML = "静止触发事件"
+      }, 2000);
+    }
+
+    lastX = x;
+    lastY = y;
+    lastZ = z;
+  })
+</script>

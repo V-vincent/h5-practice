@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>上下左右居中</title>
+</head>
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+  }
+
+  html,
+  body {
+    height: 100%;
+    width: 100%;
+  }
+
+  body {
+    display: flex;
+  }
+
+  .box {
+    width: 700px;
+    height: 300px;
+    background: red;
+    margin: auto;
+    display: flex;
+    /* flex-wrap: wrap-reverse; */
+    /* flex-flow: row-reverse wrap-reverse; */
+  }
+
+  .box>div {
+    width: 100px;
+    height: 50px;
+    text-align: center;
+    line-height: 50px;
+    background-color: chartreuse;
+    border-bottom: 1px solid springgreen;
+    margin: auto;
+  }
+</style>
+
+<body>
+  <div class="box">
+    <div style="order: 3;flex-grow: 1;">我是div1</div>
+    <div style="order: 2;flex-grow: 2;background: violet;">我是div2</div>
+    <div style="order: 1;flex-grow: 1;">我是div3</div>
+  </div>
+</body>
+
+</html>

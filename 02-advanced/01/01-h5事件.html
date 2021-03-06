@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>移动端事件</title>
+</head>
+<style>
+  #con {
+    width: 300px;
+    height: 200px;
+    background: yellow;
+  }
+</style>
+
+<body>
+  <h1>移动端事件</h1>
+  <button class="touchstart" id="touchstart">touchstart</button>
+  <div id="con"></div>
+</body>
+
+</html>
+<script>
+  function $getId(id) {
+    return document.getElementById(id);
+  }
+  let btn = $getId('touchstart');
+  // PC端 网页打开事件 <= 2s  移动端：1.5s
+  // 移动端执行click事件需要 300ms
+  btn.addEventListener('click', function () {
+    console.log('click');
+  })
+  btn.addEventListener('touchstart', function () {
+    console.log('touchstart');
+  })
+
+  let con = $getId('con');
+  let time = null;
+  // 使用touchmove事件要注意：防抖、防止频繁触发事件
+  // 事件节流
+  con.addEventListener('touchmove', function () {
+    if (!time) {
+      time = setTimeout(() => {
+        time = null;
+        console.log('touchmove');
+      }, 1000);
+    }
+  })
+</script>
